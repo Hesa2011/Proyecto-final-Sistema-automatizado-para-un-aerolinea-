@@ -1,0 +1,119 @@
+#Sistema de Registro Automatizado para una Aerolínea
+
+nombre = "Bienvenido al sistema automatizado de registro de la Aerolínea"
+print("Hola, " + nombre)
+
+def es_primo(numero):
+    if numero < 2:
+        return False
+    for i in range(2, int(numero ** 0.5) + 1):
+        if numero % i == 0:
+            return False
+    return True
+
+nombre_pasajero = input("Ingrese sus nombres: ")       
+apellido_pasajero = input("Ingrese sus apellidos: ") 
+correo_pasajero = input("Ingrese su correo: ")
+numero_pasaporte = int(input("Ingrese su número de pasaporte *Este no debe contener letras*: "))  
+categoria_vuelo = input("Ingrese la categoría de vuelo (premium, economy): ")  
+asiento_deseado = input("Ingrese el número de asiento deseado o 'random' para asiento aleatorio: ") 
+datos_pasajero = (nombre_pasajero, apellido_pasajero, numero_pasaporte,correo_pasajero, categoria_vuelo) 
+e_ticket = {}  
+
+print("\nDatos del pasajero:")
+print(f"Nombre: {nombre_pasajero.upper()}")
+print(f"Apellido: {apellido_pasajero.upper()}")
+print(f"Número de pasaporte: {numero_pasaporte}")
+print(f"Correo electrónico: {correo_pasajero}")
+print(f"Categoría de vuelo: {categoria_vuelo}")
+print(f"Asiento deseado: {asiento_deseado}")
+
+ultimo_digito = numero_pasaporte % 10  
+
+asientos_primos = ['2A', '3A', '5A', '7A', '11A', '13A', '17A', '19A', '23A', '29A', '31A', '37A', '41A', '43A',]  
+asientos_no_primos = ['4B', '6E', '8C', '9D', '10B', '14D', '16F', '18G', '20H', '22I', '24J', '25K', '28L', '30M', '37N', '34O', '36P', '38Q', '40R']  
+
+if asiento_deseado.lower() == "random":
+    if es_primo(ultimo_digito):
+        asiento_asignado = asientos_primos[ultimo_digito % len(asientos_primos)]
+    else:
+        asiento_asignado = asientos_no_primos[ultimo_digito % len(asientos_no_primos)]
+else:
+    asiento_asignado = asiento_deseado
+
+print("Asiento asignado:", asiento_asignado)
+
+texto= "------------------------"
+lineas = texto.split()
+print(lineas)
+
+e_ticket["nombre"] = nombre_pasajero.upper()
+e_ticket["apellido"] = apellido_pasajero.upper()
+e_ticket["pasaporte"] = numero_pasaporte
+e_ticket["correo electronico"] = correo_pasajero.upper() 
+e_ticket["categoria"] = categoria_vuelo
+e_ticket["asiento"] = asiento_asignado
+
+
+print("\nE-ticket generado:")
+print(e_ticket)
+
+if categoria_vuelo.capitalize() == "premium":
+    print("Acceso a la sala VIP.")
+elif categoria_vuelo.capitalize() == "economy":
+    print("Acceso a la clase economy.")
+
+edad_pasajero = int(input("Ingrese su edad: "))  
+
+if edad_pasajero < 12:
+    tarifa = 150.00  
+elif 21 <= edad_pasajero < 60:
+    tarifa = 250.00  
+else:
+    tarifa = 150.00  
+
+print(f"La tarifa del vuelo para {nombre_pasajero.capitalize()+ apellido_pasajero.capitalize()} es de: ${tarifa:.2f}")
+
+texto= "------------------------"
+lineas = texto.split()
+print(lineas)
+
+descuento_alquiler_autos = input("¿Desea onbtener un descuentos en nuestras compañias asociadas en el alquiler de autos? (si/no): ")
+if descuento_alquiler_autos.lower() == "si":
+    print("Por favor, ingrese los siguientes datos:")
+    marca_auto = input("Marca del auto: ")
+    modelo_auto = input("Modelo del auto: ")
+    año_auto = int(input("Año del auto: "))
+    kilometraje_auto = float(input("Kilometraje del auto: "))
+    descuento_auto = 0.0
+
+    if kilometraje_auto > 100000:
+        descuento_auto = 34.25
+    elif kilometraje_auto > 50000:
+        descuento_auto = 10.9
+
+    print(f"El descuento en el alquiler del auto {marca_auto} {modelo_auto} del año {año_auto} es de: ${descuento_auto * tarifa:.2f} aplica para la agencia de autos Jetcars ya que este modelo se encuentra disponible en sus concesionarios, revise su bandeja de entrada, le enviaremos un correo con el detalle del descuento.")
+
+print("Gracias por su eleccion. Disfrute su vuelo.")
+texto= "------------------------"
+lineas = texto.split()
+print(lineas)
+
+descuento_en_hospedaje = input("¿Desea obtener un descuento en nuestros servicios de hospedaje? (si/no): ")
+if descuento_en_hospedaje.lower() == "si": 
+    
+  print("Por favor, ingrese los siguientes datos:")
+nombre_del_alojamiento = input("Nombre del alojamiento: ")
+tipo_de_alojamiento = input("Tipo de alojamiento (hotel, apartamento, camping): ")
+cantidad_de_noches = int(input("Cantidad de noches: "))
+descuento_en_hospedaje = 0.0
+if cantidad_de_noches > 3:
+    descuento_en_hospedaje = 10.0
+
+elif cantidad_de_noches > 1:
+    descuento_en_hospedaje = 5.0
+
+print(f"El descuento en el hospedaje en {nombre_del_alojamiento} es de: ${descuento_en_hospedaje * tarifa:.2f} aplica para todos los alojamientos de esta franquicia, revise su bandeja de entrada, le enviaremos un correo con el detalle del descuento.")
+print("Gracias por su eleccion, esperamos que disfrute su estadia ☆☆☆☆☆.")
+ 
+
